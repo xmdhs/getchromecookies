@@ -32,7 +32,7 @@ func (c *Chrome) GetCookie() (s []CookieResultCooky, err error) {
 	cxt := context.TODO()
 	cxt, cancel := context.WithCancel(cxt)
 	defer cancel()
-	port := getProt()
+	port := GetProt()
 	_, err = c.runChrome(cxt, port)
 	if err != nil {
 		return nil, fmt.Errorf("GetCookie: %w", err)
@@ -120,7 +120,7 @@ type wsjson struct {
 	Ws string `json:"webSocketDebuggerUrl"`
 }
 
-func getProt() int {
+func GetProt() int {
 	l, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
 		panic(err)
